@@ -46,7 +46,7 @@ The config automatically installs all the plugins and tooling needed.
 <!-- vale Google.FirstPerson = NO -->
 
 ## Contributions
-Though I experienced with nvim, I am actually pretty new to python. So if I missed something important, contributions are welcome.
+Though I am experienced with nvim, I am quite new to python. So if I missed something important, contributions are welcome.
 
 ## About me
 __About Me__  
