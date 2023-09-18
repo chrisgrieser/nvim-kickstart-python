@@ -25,6 +25,9 @@ vim.opt.tabstop = 4
 -- if you are a heavy user of folds, consider the using nvim-ufo plugin
 vim.opt.foldmethod = "indent"
 
+-- make enough space for the diagnostics
+vim.opt.signcolumn = "yes:1" 
+
 --------------------------------------------------------------------------------
 
 local plugins = {
@@ -34,7 +37,10 @@ local plugins = {
 	-- auto-install of those external tools
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		dependencies = "williamboman/mason.nvim",
+		dependencies = {
+			{ "williamboman/mason.nvim", opts = true },
+			{ "williamboman/mason-lspconfig.nvim", opts = true },
+		},
 		opts = {
 			ensure_installed = {
 				"pyright", -- LSP for python
@@ -215,7 +221,11 @@ local plugins = {
 		"rcarriga/nvim-dap-ui",
 		dependencies = "mfussenegger/nvim-dap",
 		keys = {
-			{ "<leader>du", require("dapui").toggle, desc = "Toggle Debugger UI" },
+			{
+				"<leader>du",
+				function() require("dapui").toggle() end,
+				desc = "Toggle Debugger UI",
+			},
 		},
 		-- automatically open/close the DAP UI when starting/stopping the debugger
 		config = function()
