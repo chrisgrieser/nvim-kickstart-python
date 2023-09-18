@@ -7,7 +7,7 @@ Like to [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim), but specif
 
 ## Motivation
 <!-- vale Google.FirstPerson = NO -->
-While there are quite a few great nvim distros and nvim starter configs out there, one thing I somewhat missed was something like a base config for specific languages. I recently started to learn python and was missing a minimal example what the state-of-the-art nvim setup specifically for python is.
+While there are quite a few great nvim distros and nvim starter configs out there, one thing I somewhat missed was a base config for specific languages. I recently started to learn python and was missing a minimal example what the state-of-the-art nvim setup specifically for python is.
 
 After figuring most of it out, I decided to publish this config for others to use. It is intended as a launch point for python devs switching to nvim, or as a reference for nvim users who want to start doing python development.
 <!-- vale Google.FirstPerson = NO -->
