@@ -1,4 +1,4 @@
--- Bootstrap `lazy.nvim` as the plugin manager
+-- Bootstrap the plugin manager `lazy.nvim`
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 local lazyIsInstalled = vim.loop.fs_stat(lazypath)
 if not lazyIsInstalled then
@@ -14,7 +14,8 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 --------------------------------------------------------------------------------
--- Some Python related options
+-- SOME BASIC PYTHON RELATED OPTIONS
+
 -- use pep8 standards
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 4
@@ -25,12 +26,11 @@ vim.opt.tabstop = 4
 vim.opt.foldmethod = "indent"
 
 --------------------------------------------------------------------------------
--- Install & Configure Plugins
-require("lazy").setup({
-	--------------------------------------------------------------------------------
-	-- TOOLING & LSPs
 
-	-- manager for external tools (LSPs, linters, debuggers, formatters)
+local plugins = {
+	-- TOOLING: COMPLETION, DIAGNOSTICS, FORMATTING
+
+	-- Manager for external tools (LSPs, linters, debuggers, formatters)
 	-- auto-install of those external tools
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -41,83 +41,154 @@ require("lazy").setup({
 				"ruff-lsp", -- linter for python (includes flake8, pep8, etc.)
 				"debugpy", -- debugger
 				"black", -- formatter
+				"isort", -- organize imports
 				"taplo", -- LSP for toml (for pyproject.toml files)
 			},
 		},
 	},
 
 	-- Setup the LSPs
+	-- `gd` and `gr` for goto definition / references
+	-- `<leader>c` for code actions (organize imports, etc.)
 	{
 		"neovim/nvim-lspconfig",
-		-- `gd` and `gr` for goto definition and references
-		-- `<leader>c` for code actions (organize imports, etc.)
 		keys = {
 			{ "gd", vim.lsp.buf.definition, desc = "Goto Definition" },
 			{ "gr", vim.lsp.buf.references, desc = "Goto References" },
 			{ "<leader>c", vim.lsp.buf.code_action, desc = "Code Action" },
 		},
 		init = function()
-			-- enable auto-completion for nvim-cmp
+			-- this snippet enables auto-completion
 			local lspCapabilities = vim.lsp.protocol.make_client_capabilities()
 			lspCapabilities.textDocument.completion.completionItem.snippetSupport = true
 
+			-- setup pyright with completion capabilities
 			require("lspconfig").pyright.setup({
 				capabilities = lspCapabilities,
-				-- pyright configuration options are entered here
-				-- https://github.com/microsoft/pyright/blob/main/docs/settings.md
-				settings = {
-					pyright = {},
-				},
+			})
+
+			-- setup taplo with completion capabilities
+			require("lspconfig").taplo.setup({
+				capabilities = lspCapabilities,
 			})
 
 			-- ruff uses an LSP proxy, therefore it needs to be enabled as if it
 			-- were a LSP. In practice, ruff only provides linter-like diagnostics
-			-- and some code actions, and is not a full LSP (yet).
+			-- and some code actions, and is not a full LSP yet.
 			require("lspconfig").ruff_lsp.setup({
-				-- organize imports & auto-fixing as code actions
+				-- organize imports disabled, since we are already using `isort` for that
+				-- alternative, this can be enabled to make `organize imports`
+				-- available as code action
 				settings = {
-					organizeImports = true,
-					fixall = true,
+					organizeImports = false,
 				},
-				-- disable ruff as hover provider, since we are using pyright for that
+				-- disable ruff as hover provider to avoid conflicts with pyright
 				on_attach = function(client) client.server_capabilities.hoverProvider = false end,
-			})
-
-			require("lspconfig").taplo.setup({
-				capabilities = lspCapabilities,
 			})
 		end,
 	},
 
+	-- Formatting client: conform.nvim
+	-- - configured to use black & isort in python
+	-- - use the taplo-LSP for formatting in toml
+	-- - Formatting is triggered via `<leader>f`, but also automatically on save
+	{
+		"stevearc/conform.nvim",
+		keys = {
+			{
+				"<leader>f",
+				function() require("conform").format({ lsp_fallback = true }) end,
+				desc = "Format",
+			},
+		},
+		opts = {
+			formatters_by_ft = {
+				-- first use isort and then black
+				python = { "isort", "black" },
+			},
+			-- enable format-on-save
+			format_on_save = {
+				-- when no formatter is setup for a filetype, fallback to formatting
+				-- via the LSP. This is relevant e.g. for taplo (toml LSP), where the
+				-- LSP can handle the formatting for us
+				lsp_fallback = true,
+			},
+		},
+	},
+
+	-- Completion via nvim-cmp
+	-- - Confirm a completion with `<CR>` (Return)
+	-- - select an item with `<Tab>`/`<S-Tab>`
+	{
+		"hrsh7th/nvim-cmp",
+		dependencies = {
+			"hrsh7th/cmp-nvim-lsp", -- use suggestions from the LSP
+			"L3MON4D3/LuaSnip", -- snippet engine
+			"saadparwaiz1/cmp_luasnip", -- adapter for the snippet engine
+		},
+		config = function()
+			local cmp = require("cmp")
+			cmp.setup({
+				-- tell cmp to use Luasnip as our snippet engine
+				snippet = {
+					expand = function(args) require("luasnip").lsp_expand(args.body) end,
+				},
+				-- define the mappings for the completion.
+				mappings = cmp.mapping.preset.insert({
+					["<CR>"] = cmp.mapping.confirm({ select = true }), -- true = autoselect first entry
+					["<Tab>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.select_next_item()
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
+					["<S-Tab>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.select_prev_item()
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
+				}),
+			})
+		end,
+	},
 	-----------------------------------------------------------------------------
 	-- SYNTAX HIGHLIGHTING
 
-	-- use treesitter for syntax highlighting and auto-install the parser for python
+	-- treesitter for syntax highlighting
+	-- - auto-installs the parser for python
 	{
 		"nvim-treesitter/nvim-treesitter",
+		-- automatically update the parsers with every new release of treesitter
 		build = ":TSUpdate",
+
+		-- since treesitter's setup call is `require("nvim-treesitter.configs").setup`,
+		-- instead of `require("nvim-treesitter").setup` like other plugins do, we
+		-- need to tell lazy.nvim which module to via the `main` key
 		main = "nvim-treesitter.configs",
+
 		opts = {
-			ensure_installed = "python",
-			highlight = { enable = true },
+			ensure_installed = "python", -- auto-install the Treesitter parser for python
+			highlight = { enable = true }, -- enable treesitter syntax highlighting
 		},
 	},
 
 	-- better indentation behavior
-	{
-		"Vimjas/vim-python-pep8-indent",
-		ft = "python",
-	},
+	-- by default, vim has some weird indentation behavior in some edge cases,
+	-- which this plugin fixes
+	{ "Vimjas/vim-python-pep8-indent" },
 
 	-----------------------------------------------------------------------------
 	-- DEBUGGING
 
 	-- DAP Client for nvim
+	-- - start the debugger with `<leader>dc`
+	-- - add breakpoints with `<leader>db`
+	-- - terminate the debugger `<leader>dt`
 	{
 		"mfussenegger/nvim-dap",
-		-- start the debugger with `<leader>dc`
-		-- add breakpoints with `<leader>db`
-		-- terminate the debugger `<leader>dt`
 		keys = {
 			{
 				"<leader>dc",
@@ -138,9 +209,14 @@ require("lazy").setup({
 	},
 
 	-- UI for the debugger
+	-- - toggle debugger UI with `<leader>du`
+	-- - the debugger UI is also automatically opened when starting/stopping the debugger
 	{
 		"rcarriga/nvim-dap-ui",
 		dependencies = "mfussenegger/nvim-dap",
+		keys = {
+			{ "<leader>du", require("dapui").toggle, desc = "Toggle Debugger UI" },
+		},
 		-- automatically open/close the DAP UI when starting/stopping the debugger
 		config = function()
 			local listener = require("dap").listeners
@@ -150,10 +226,25 @@ require("lazy").setup({
 		end,
 	},
 
+	-- Configuration for the python debugger
+	-- - configures debugpy for us
+	-- - uses the debugpy installation from mason
+	{
+		"mfussenegger/nvim-dap-python",
+		dependencies = "mfussenegger/nvim-dap",
+		config = function()
+			-- uses the debugypy installation by mason
+			local debugpyPath = vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python3"
+			require("dap-python").setup(debugpyPath, {})
+		end,
+	},
+
 	-----------------------------------------------------------------------------
 	-- EDITING SUPPORT PLUGINS
+	-- some plugins that help with python-specific editing tasks
 
-	-- quickly create docstrings via `<leader>d`
+	-- Docstring creation
+	-- - quickly create docstrings via `<leader>d`
 	{
 		"danymat/neogen",
 		opts = true,
@@ -165,12 +256,18 @@ require("lazy").setup({
 			},
 		},
 	},
-	-- auto-convert strings to f-strings and back
+
+	-- f-strings
+	-- - auto-convert strings to f-strings when typing `{}` in a string
+	-- - also auto-converts f-strings back to regular strings when removing `{}`
 	{
 		"chrisgrieser/nvim-puppeteer",
-		ft = "python",
+		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
-	-- support: conveniently select virtual environments
+
+	-- select virtual environments
+	-- - makes pyright and debugpy aware of the selected virtual environment
+	-- - Select a virtual environment with `:VenvSelect`
 	{
 		"linux-cultist/venv-selector.nvim",
 		dependencies = {
@@ -178,20 +275,13 @@ require("lazy").setup({
 			"nvim-telescope/telescope.nvim",
 			"mfussenegger/nvim-dap-python",
 		},
-		cmd = { "VenvSelect", "VenvSelectCached" },
 		opts = {
 			dap_enabled = true, -- makes the debugger work with venv
 		},
-		init = function()
-			-- auto-select venv when entering a python buffer
-			-- https://github.com/linux-cultist/venv-selector.nvim#-automate
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "python",
-				callback = function()
-					local venv = vim.fn.findfile("pyproject.toml", vim.fn.getcwd() .. ";")
-					if venv ~= "" then require("venv-selector").retrieve_from_cache() end
-				end,
-			})
-		end,
 	},
-})
+}
+
+--------------------------------------------------------------------------------
+
+-- tell lazy.nvim to load and configure all the plugins
+require("lazy").setup(plugins)
