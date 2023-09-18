@@ -100,6 +100,7 @@ local plugins = {
 	-- - Formatting is triggered via `<leader>f`, but also automatically on save
 	{
 		"stevearc/conform.nvim",
+		event = "BufWritePre", -- load the plugin before saving
 		keys = {
 			{
 				"<leader>f",
@@ -265,7 +266,7 @@ local plugins = {
 	-- some plugins that help with python-specific editing operations
 
 	-- Docstring creation
-	-- - quickly create docstrings via `<leader>d`
+	-- - quickly create docstrings via `<leader>a`
 	{
 		"danymat/neogen",
 		opts = true,
