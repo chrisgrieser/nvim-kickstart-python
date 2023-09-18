@@ -16,7 +16,15 @@ A launch point for your nvim configuration for python. Like to [kickstart.nvim](
 The recommended way is to download the [init.lua](./init.lua) file and run neovim with it:
 
 ```bash
+# down load the config
+curl -O "https://raw.githubusercontent.com/chrisgrieser/nvim-kickstart-python/main/kickstart-python.lua"
+
+# start neovim with the config, opening a file `foobar.py`
+# (any existing config you are using remains untouched)
 nvim -u kickstart-python.lua foobar.py
+
+# replace your configh with kickstart-python.lua
+cp -f kickstart-python.lua ~/.config/nvim
 ```
 
 The config automatically installs all the plugins and tooling needed.

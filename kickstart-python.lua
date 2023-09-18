@@ -26,7 +26,7 @@ vim.opt.tabstop = 4
 vim.opt.foldmethod = "indent"
 
 -- make enough space for the diagnostics
-vim.opt.signcolumn = "yes:1" 
+vim.opt.signcolumn = "yes:1"
 
 --------------------------------------------------------------------------------
 
@@ -181,10 +181,21 @@ local plugins = {
 		},
 	},
 
-	-- better indentation behavior
-	-- by default, vim has some weird indentation behavior in some edge cases,
-	-- which this plugin fixes
-	{ "Vimjas/vim-python-pep8-indent" },
+	-- COLORSCHEME
+	-- In neovim, the choice of color schemes is unfortunately not purely
+	-- aesthetic – treesitter highlighting or newer features like semantic
+	-- highlighting are not always supported by a color scheme. It's therefore
+	-- recommended to use one of the popular, and actively maintained ones to get
+	-- the best syntax highlighting experience:
+	-- https://dotfyle.com/neovim/colorscheme/top
+	{
+		"folke/tokyonight.nvim",
+		-- ensure that the color scheme is loaded at once
+		lazy = false,
+		priority = 1000,
+		-- enable the colorscheme
+		config = function() vim.cmd("colorscheme tokyonight") end,
+	},
 
 	-----------------------------------------------------------------------------
 	-- DEBUGGING
@@ -251,7 +262,7 @@ local plugins = {
 
 	-----------------------------------------------------------------------------
 	-- EDITING SUPPORT PLUGINS
-	-- some plugins that help with python-specific editing tasks
+	-- some plugins that help with python-specific editing operations
 
 	-- Docstring creation
 	-- - quickly create docstrings via `<leader>d`
@@ -274,6 +285,11 @@ local plugins = {
 		"chrisgrieser/nvim-puppeteer",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
+
+	-- better indentation behavior
+	-- by default, vim has some weird indentation behavior in some edge cases,
+	-- which this plugin fixes
+	{ "Vimjas/vim-python-pep8-indent" },
 
 	-- select virtual environments
 	-- - makes pyright and debugpy aware of the selected virtual environment
