@@ -14,13 +14,13 @@ After figuring most of it out, I decided to publish this config for others to us
 
 ## Philosophy
 - This is not a nvim-distro, this is a *minimal* nvim config specifically for python. It's intended as a starting point for creating your own config.
-- ~300 lines, 20 plugins, single file
+- ~20 plugins, single file
 - Commented in detail, so it is clear what each line does.
 - The config can be fully bootstrapped: all plugins and tools are automatically installed on startup.
-- Uses the state-of-the-art plugins of the current nvim-ecosystem.
+- Uses state-of-the-art plugins of the current nvim-ecosystem.
 - The setup includes the common tooling for python development:
     - LSP (Completion, Typing): `pyright`
-    - Linting: `ruff`
+    - Linting (Diagnostics): `ruff`
     - Formatting: `black` & `isort`
     - Debugger: `debugpy`
 - In addition, this config includes editing utilities specifically for python, like docstrings creation, selecting virtual environments, or auto-converting f-strings.
@@ -28,7 +28,7 @@ After figuring most of it out, I decided to publish this config for others to us
 ## Recommendation
 Go though the [kickstart-python.lua](./kickstart-python.lua), it is commented in detail.
 
-You can copypaste the config into you current `init.lua` to use it starting point for your regular config, or you can copypaste parts of it into your existing config.
+You can copypaste the config into you current `init.lua` to use it as a starting point for your regular config, or you can copypaste parts of it into your existing config.
 
 ## Download
 Download the [kickstart-python.lua](./kickstart-python.lua) file and run neovim with it:

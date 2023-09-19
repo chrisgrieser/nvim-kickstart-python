@@ -151,7 +151,9 @@ local plugins = {
 		"hrsh7th/nvim-cmp",
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp", -- use suggestions from the LSP
-			"L3MON4D3/LuaSnip", -- snippet engine
+			-- Snippet engine. Required for nvim-cmp to work, even if you don't
+			-- intend to use custom snippets.
+			"L3MON4D3/LuaSnip",  -- snippet engine
 			"saadparwaiz1/cmp_luasnip", -- adapter for the snippet engine
 		},
 		config = function()
@@ -161,7 +163,9 @@ local plugins = {
 				snippet = {
 					expand = function(args) require("luasnip").lsp_expand(args.body) end,
 				},
-				-- define the mappings for the completion.
+				-- Define the mappings for the completion. The `fallback()` call
+				-- ensures that when there is no suggestion window open, the mapping
+				-- falls back to the default behavior (adding indentation).
 				mappings = cmp.mapping.preset.insert({
 					["<CR>"] = cmp.mapping.confirm({ select = true }), -- true = autoselect first entry
 					["<Tab>"] = cmp.mapping(function(fallback)
@@ -261,18 +265,18 @@ local plugins = {
 
 	-- COLORSCHEME
 	-- In neovim, the choice of color schemes is unfortunately not purely
-	-- aesthetic – treesitter highlighting or newer features like semantic
+	-- aesthetic – treesitter-based highlighting or newer features like semantic
 	-- highlighting are not always supported by a color scheme. It's therefore
 	-- recommended to use one of the popular, and actively maintained ones to get
 	-- the best syntax highlighting experience:
 	-- https://dotfyle.com/neovim/colorscheme/top
 	{
 		"folke/tokyonight.nvim",
-		-- ensure that the color scheme is loaded at once
+		-- ensure that the color scheme is loaded at the very beginning
 		lazy = false,
 		priority = 1000,
 		-- enable the colorscheme
-		config = function() vim.cmd("colorscheme tokyonight") end,
+		config = function() vim.cmd.colorscheme("tokyonight") end,
 	},
 
 	-----------------------------------------------------------------------------
@@ -293,19 +297,19 @@ local plugins = {
 			{
 				"<leader>db",
 				function() require("dap").toggle_breakpoint() end,
-				desc = "B Add Breakpoint",
+				desc = "Add Breakpoint",
 			},
 			{
 				"<leader>dt",
 				function() require("dap").terminate() end,
-				desc = " Terminate Debugger",
+				desc = "Terminate Debugger",
 			},
 		},
 	},
 
 	-- UI for the debugger
-	-- - toggle debugger UI with `<leader>du`
 	-- - the debugger UI is also automatically opened when starting/stopping the debugger
+	-- - toggle debugger UI manually with `<leader>du`
 	{
 		"rcarriga/nvim-dap-ui",
 		dependencies = "mfussenegger/nvim-dap",
@@ -351,7 +355,7 @@ local plugins = {
 			{
 				"<leader>a",
 				function() require("neogen").generate() end,
-				desc = " Add Docstring",
+				desc = "Add Docstring",
 			},
 		},
 	},
