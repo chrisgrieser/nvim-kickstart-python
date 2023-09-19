@@ -17,7 +17,7 @@ After figuring most of it out, I decided to publish this config for others to us
 - ~20 plugins, single file
 - Commented in detail, so it is clear what each line does.
 - The config can be fully bootstrapped: all plugins and tools are automatically installed on startup.
-- Uses state-of-the-art plugins of the current nvim-ecosystem.
+- Uses the current state-of-the-art of the nvim plugin ecosystem.
 - The setup includes the common tooling for python development:
     - LSP (Completion, Typing): `pyright`
     - Linting (Diagnostics): `ruff`
