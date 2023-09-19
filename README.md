@@ -3,7 +3,7 @@
 
 A launch point for your nvim config for python.
 
-Similar to [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim), but specifically python development.
+Similar to [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim), but specifically for python development.
 
 ## Motivation
 <!-- vale Google.FirstPerson = NO -->
