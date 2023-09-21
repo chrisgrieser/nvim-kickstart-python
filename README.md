@@ -46,6 +46,12 @@ nvim -u kickstart-python.lua foobar.py
 The config automatically installs all the plugins and tooling needed.
 <!-- vale Google.FirstPerson = NO -->
 
+## Additional plugins of interest
+These plugins are not included in the config, but they are worth mentioning, as some people might be interested in them:
+- [nvim-various-textobjs](https://github.com/chrisgrieser/nvim-various-textobjs): Adds various indentation-based text objects.
+- [NotebookNavigator](https://github.com/GCBallesteros/NotebookNavigator.nvim): Emulate Jupyter Notebook like REPL-behavior.
+- [magma.nvim](https://github.com/dccsillag/magma-nvim)
+
 ## Contributions
 Though I am experienced with nvim, I am quite new to python. So improvements are welcome.
 
