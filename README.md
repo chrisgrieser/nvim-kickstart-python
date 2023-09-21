@@ -12,9 +12,9 @@ While there are quite a few great nvim distros and nvim starter configs out ther
 After figuring most of it out, I decided to publish this config for others to use. It is intended as a launch point for python devs switching to nvim, or as a reference for nvim users who want to start doing python development.
 <!-- vale Google.FirstPerson = NO -->
 
-## Philosophy
+## Philosophy & Features
 - This is not a nvim-distro, this is a *minimal* nvim config specifically for python. It's intended as a starting point for creating your own config.
-- ~20 plugins, single file
+- ~20 plugins, single file.
 - Commented in detail, so it is clear what each line does.
 - The config can be fully bootstrapped: all plugins and tools are automatically installed on startup.
 - Uses the current state-of-the-art of the nvim plugin ecosystem.
@@ -23,6 +23,7 @@ After figuring most of it out, I decided to publish this config for others to us
     - Linting (Diagnostics): `ruff`
     - Formatting: `black` & `isort`
     - Debugger: `debugpy`
+    - Embedded REPL: `ipython` (if not installed, falls back to `python3`)
 - In addition, this config includes editing utilities specifically for python, like docstrings creation, selecting virtual environments, or auto-converting f-strings.
 
 ## Recommendation
@@ -46,9 +47,12 @@ The config automatically installs all the plugins and tooling needed.
 <!-- vale Google.FirstPerson = NO -->
 
 ## Contributions
-Though I am experienced with nvim, I am quite new to python. So if I missed something important, contributions are welcome.
+Though I am experienced with nvim, I am quite new to python. So improvements are welcome.
 
-## About me
+## Credits
+__Thanks__  
+[kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim) as an example how to do this.
+
 __About Me__  
 In my day job, I am a sociologist studying the social mechanisms underlying the digital economy. For my PhD project, I investigate the governance of the app economy and how software ecosystems manage the tension between innovation and compatibility. If you are interested in this subject, feel free to get in touch.
 
