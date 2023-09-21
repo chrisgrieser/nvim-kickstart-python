@@ -258,8 +258,12 @@ local plugins = {
 		main = "nvim-treesitter.configs",
 
 		opts = {
-			ensure_installed = "python", -- auto-install the Treesitter parser for python
 			highlight = { enable = true }, -- enable treesitter syntax highlighting
+			 -- auto-install the Treesitter parser for python and toml (e.g., pyproject.toml files)
+			ensure_installed = {
+				"python",
+				"toml",
+			},
 		},
 	},
 
