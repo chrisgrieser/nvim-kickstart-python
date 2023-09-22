@@ -41,7 +41,6 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.cmd.inoreabbrev("<buffer> false False")
 
 		-- in the same way, we can fix habits regarding comments or None
-		vim.cmd.inoreabbrev("<buffer> // #")
 		vim.cmd.inoreabbrev("<buffer> -- #")
 		vim.cmd.inoreabbrev("<buffer> null None")
 		vim.cmd.inoreabbrev("<buffer> none None")
