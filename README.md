@@ -14,17 +14,17 @@ After figuring most of it out, I decided to publish this config for others to us
 
 ## Philosophy & Features
 - This is not a nvim-distro, this is a *minimal* nvim config specifically for python. It's intended as a starting point for creating your own config.
-- ~20 plugins, single file.
-- Commented in detail, so it is clear what each line does.
+- ~20 plugins, ~400 lines, single `init.lua`
+- Includes detailled comments explaining what the config does.
 - The config can be fully bootstrapped: all plugins and tools are automatically installed on startup.
 - Uses the current state-of-the-art of the nvim plugin ecosystem.
-- The setup includes the common tooling for python development:
+-Includes some common tooling for python development:
     - LSP (Completion, Typing): `pyright`
     - Linting (Diagnostics): `ruff`
     - Formatting: `black` & `isort`
     - Debugger: `debugpy`
     - Embedded REPL: `ipython` (if not installed, falls back to `python3`)
-- In addition, this config includes editing utilities specifically for python, like docstrings creation, selecting virtual environments, or auto-converting f-strings.
+- In addition, this config includes editing utilities specifically for python, like for example docstrings creation, selecting virtual environments, or auto-converting f-strings.
 
 ## Recommendation
 Go though the [kickstart-python.lua](./kickstart-python.lua), it is commented in detail.
