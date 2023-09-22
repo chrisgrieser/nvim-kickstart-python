@@ -258,11 +258,8 @@ local plugins = {
 
 		opts = {
 			highlight = { enable = true }, -- enable treesitter syntax highlighting
-			-- auto-install the Treesitter parser for python and toml (e.g., pyproject.toml files)
-			ensure_installed = {
-				"python",
-				"toml",
-			},
+			-- auto-install the Treesitter parser for python and related languages
+			ensure_installed = { "python", "toml", "rst", "ninja" },
 		},
 	},
 
@@ -341,6 +338,7 @@ local plugins = {
 		config = function()
 			-- uses the debugypy installation by mason
 			local debugpyPythonPath = require("mason-registry").get_package("debugpy"):get_install_path()
+				.. "/venv/bin/python3"
 			require("dap-python").setup(debugpyPythonPath, {})
 		end,
 	},
