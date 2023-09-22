@@ -152,7 +152,7 @@ local plugins = {
 			"hrsh7th/cmp-nvim-lsp", -- use suggestions from the LSP
 			-- Snippet engine. Required for nvim-cmp to work, even if you don't
 			-- intend to use custom snippets.
-			"L3MON4D3/LuaSnip",  -- snippet engine
+			"L3MON4D3/LuaSnip", -- snippet engine
 			"saadparwaiz1/cmp_luasnip", -- adapter for the snippet engine
 		},
 		config = function()
@@ -258,7 +258,7 @@ local plugins = {
 
 		opts = {
 			highlight = { enable = true }, -- enable treesitter syntax highlighting
-			 -- auto-install the Treesitter parser for python and toml (e.g., pyproject.toml files)
+			-- auto-install the Treesitter parser for python and toml (e.g., pyproject.toml files)
 			ensure_installed = {
 				"python",
 				"toml",
@@ -340,8 +340,8 @@ local plugins = {
 		dependencies = "mfussenegger/nvim-dap",
 		config = function()
 			-- uses the debugypy installation by mason
-			local debugpyPath = vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python3"
-			require("dap-python").setup(debugpyPath, {})
+			local debugpyPythonPath = require("mason-registry").get_package("debugpy"):get_install_path()
+			require("dap-python").setup(debugpyPythonPath, {})
 		end,
 	},
 
