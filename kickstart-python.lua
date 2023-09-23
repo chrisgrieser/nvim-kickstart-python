@@ -150,6 +150,7 @@ local plugins = {
 		"hrsh7th/nvim-cmp",
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp", -- use suggestions from the LSP
+
 			-- Snippet engine. Required for nvim-cmp to work, even if you don't
 			-- intend to use custom snippets.
 			"L3MON4D3/LuaSnip", -- snippet engine
@@ -223,7 +224,7 @@ local plugins = {
 				-- cells.
 				repl_open_cmd = "horizontal bot 10 split",
 
-				-- This defines which binary to use for the REPL. If ipython is
+				-- This defines which binary to use for the REPL. If `ipython` is
 				-- available, it will use `ipython`, otherwise it will use `python3`.
 				-- since the python repl does not play well with indents, it's
 				-- preferable to use `ipython` or `bypython` here.
@@ -324,8 +325,8 @@ local plugins = {
 		config = function()
 			local listener = require("dap").listeners
 			listener.after.event_initialized["dapui_config"] = function() require("dapui").open() end
-			listener.before.event_terminated["dapui_config"] = require("dapui").close()
-			listener.before.event_exited["dapui_config"] = require("dapui").close()
+			listener.before.event_terminated["dapui_config"] = function () require("dapui").close() end
+			listener.before.event_exited["dapui_config"] = function() require("dapui").close() end
 		end,
 	},
 
