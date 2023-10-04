@@ -132,9 +132,9 @@ local plugins = {
 			formatters_by_ft = {
 				-- first use isort and then black
 				python = { "isort", "black" },
-				-- "inject" is a "special" formatter from conform.nvim, which
-				-- formats treesitter-injected code. In effect, hits will make
-				-- conform.nvim format any python codeblocks inside a markdown file.
+				-- "inject" is a special formatter from conform.nvim, which
+				-- formats treesitter-injected code. Basically, this makes
+				-- conform.nvim format python codeblocks inside a markdown file.
 				markdown = { "inject" }, 
 			},
 			-- enable format-on-save
