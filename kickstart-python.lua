@@ -32,7 +32,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.opt_local.softtabstop = 4
 
 		-- folds based on indentation https://neovim.io/doc/user/fold.html#fold-indent
-		-- if you are a heavy user of folds, consider the using nvim-ufo plugin
+		-- if you are a heavy user of folds, consider using `nvim-ufo`
 		vim.opt_local.foldmethod = "indent"
 
 		-- automatically capitalize boolean values. Useful if you come from a
