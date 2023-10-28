@@ -14,7 +14,8 @@ After figuring most of it out, I decided to publish this config for others to us
 
 ## Philosophy & Features
 - This is not a nvim-distro, this is a *minimal* nvim config specifically for python. It's intended as a starting point for creating your own config.
-- ~20 plugins, ~400 lines, everything in one single `init.lua`
+- Requirement: nvim v0.9.
+- ~20 plugins, ~400 lines, everything in one single `init.lua`. 
 - Includes detailled comments explaining what the config does.
 - The config can be fully bootstrapped: all plugins and tools are automatically installed on startup.
 - Uses the current state-of-the-art of the nvim plugin ecosystem.
@@ -48,9 +49,11 @@ The config automatically installs all the plugins and tooling needed.
 
 ## Additional plugins of interest
 These plugins are not included in the config, but they are worth mentioning, as some people might be interested in them:
-- [nvim-various-textobjs](https://github.com/chrisgrieser/nvim-various-textobjs): Adds various indentation-based text objects.
-- [NotebookNavigator](https://github.com/GCBallesteros/NotebookNavigator.nvim): Emulate Jupyter Notebook like REPL-behavior.
-- [magma.nvim](https://github.com/dccsillag/magma-nvim)
+- [nvim-various-textobjs](https://github.com/chrisgrieser/nvim-various-textobjs): various indentation-based text objects
+- [NotebookNavigator](https://github.com/GCBallesteros/NotebookNavigator.nvim): Jupyter Notebook emulation
+- [magma.nvim](https://github.com/dccsillag/magma-nvim): Jupyter Notebook integration
+- [ropify.nvim](https://github.com/niqodea/ropify): ropify integration
+- [nvim-conda](https://github.com/kmontocam/nvim-conda): conda environment selector
 
 ## Contributions
 Though I am experienced with nvim, I am quite new to python. So improvements are welcome.
