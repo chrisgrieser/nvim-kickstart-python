@@ -54,6 +54,7 @@ These plugins are not included in the config, but they are worth mentioning, as 
 - [magma.nvim](https://github.com/dccsillag/magma-nvim): Jupyter Notebook integration
 - [ropify.nvim](https://github.com/niqodea/ropify): ropify integration
 - [nvim-conda](https://github.com/kmontocam/nvim-conda): conda environment selector
+- [nvim-lspimport](https://github.com/stevanmilic/nvim-lspimport): : Automatically resolves imports for `pyright`.
 
 ## Contributions
 Though I am experienced with nvim, I am quite new to python. So improvements are welcome.
