@@ -263,6 +263,7 @@ local plugins = {
 
 		opts = {
 			highlight = { enable = true }, -- enable treesitter syntax highlighting
+			indent = { enable = true }, -- better indentation behavior
 			ensure_installed = {
 				-- auto-install the Treesitter parser for python and related languages
 				"python",
