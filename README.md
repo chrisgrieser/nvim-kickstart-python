@@ -6,6 +6,18 @@ A launch point for your nvim config for python.
 Similar to [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim), but
 specifically for python development.
 
+<!-- toc -->
+
+- [Motivation](#motivation)
+- [Philosophy & Features](#philosophy--features)
+- [Recommendation](#recommendation)
+- [Download](#download)
+- [Additional plugins of interest](#additional-plugins-of-interest)
+- [Recommended Citation](#recommended-citation)
+- [Credits](#credits)
+
+<!-- tocstop -->
+
 ## Motivation
 <!-- vale Google.FirstPerson = NO -->
 While there are quite a few great nvim distros and nvim starter configs out
@@ -76,9 +88,17 @@ some people might be interested in them:
 - [jupytext.nvim](https://github.com/GCBallesteros/jupytext.nvim): Convert
   Jupyter Notebooks to code and back.
 
-## Contributions
-Though I am experienced with nvim, I am quite new to python. Improvements are
-welcome.
+## Recommended Citation
+Please cite this software project as (APA):
+
+```txt
+Grieser, C. (2023). nvim-kickstart-python [Computer software]. 
+https://github.com/chrisgrieser/nvim-kickstart-python
+```
+
+For other citation styles, use the following metadata:
+- [Citation File Format](./CITATION.cff)
+- [BibTeX](./CITATION.bib)
 
 ## Credits
 __Thanks__  
