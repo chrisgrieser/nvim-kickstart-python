@@ -12,6 +12,7 @@ specifically for python development.
 - [Philosophy & Features](#philosophy--features)
 - [Recommendation](#recommendation)
 - [Download](#download)
+- [Syntax Highlighting](#syntax-highlighting)
 - [Additional plugins of interest](#additional-plugins-of-interest)
 - [Recommended Citation](#recommended-citation)
 - [Credits](#credits)
@@ -72,6 +73,16 @@ nvim -u kickstart-python.lua foobar.py
 
 The config automatically installs all the plugins and tooling needed.
 <!-- vale Google.FirstPerson = NO -->
+
+## Syntax Highlighting
+Is provided by the [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
+plugin and/or the [semshi](https://github.com/numirias/semshi) plugin. The later
+requires `pynvim` (`python3 -m pip install pynvim`) to be installed.
+
+Both provide better highlighting, treesitter is considered the more "modern"
+approach. Treesitter covers some cases semshi does not and vice versa. Have a
+[look at the comparison](./treesitter-or-semshi.md) to decide for yourself which
+one to use. (You can use both, of course.)
 
 ## Additional plugins of interest
 These plugins are not included in the config, but they are worth mentioning, as
