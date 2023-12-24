@@ -247,7 +247,7 @@ local plugins = {
 	},
 
 	-----------------------------------------------------------------------------
-	-- SYNTAX HIGHLIGHTING
+	-- SYNTAX HIGHLIGHTING & COLORSCHEME
 
 	-- treesitter for syntax highlighting
 	-- - auto-installs the parser for python
@@ -270,14 +270,47 @@ local plugins = {
 				"toml",
 				"rst",
 				"ninja",
-				-- needed for formatting code-blockcs inside markdown via conform.nvim
+				-- needed for formatting code-blocks inside markdown via conform.nvim
 				"markdown", 
 				"markdown_inline", 
 			},
 		},
 	},
 
-	-- COLORSCHEME
+	-- semshi for additional syntax highlighting. 
+	-- See the README for Treesitter cs Semshi comparison.
+	-- requires `pynvim` (`python3 -m pip install pynvim`)
+	{
+		"wookayin/semshi", -- maintained fork
+		ft = "python",
+		build = ":UpdateRemotePlugins", -- don't disable `rplugin` in lazy.nvim for this
+		init = function()
+			vim.g.python3_host_prog = vim.fn.exepath("python3")
+			-- better done by LSP
+			vim.g["semshi#error_sign"] = false
+			vim.g["semshi#simplify_markup"] = false
+			vim.g["semshi#mark_selected_nodes"] = false
+			vim.g["semshi#update_delay_factor"] = 0.001
+
+			vim.api.nvim_create_autocmd({ "VimEnter", "ColorScheme" }, {
+				callback = function()
+					vim.cmd([[
+						highlight! semshiGlobal gui=italic
+						highlight! link semshiImported @lsp.type.namespace
+						highlight! link semshiParameter @lsp.type.parameter
+						highlight! link semshiParameterUnused DiagnosticUnnecessary
+						highlight! link semshiBuiltin @function.builtin
+						highlight! link semshiAttribute @field
+						highlight! link semshiSelf @lsp.type.selfKeyword
+						highlight! link semshiUnresolved @lsp.type.unresolvedReference
+						highlight! link semshiFree @comment
+					]])
+				end,
+			})
+		end,
+	},
+
+	-- Colorscheme
 	-- In neovim, the choice of color schemes is unfortunately not purely
 	-- aesthetic – treesitter-based highlighting or newer features like semantic
 	-- highlighting are not always supported by a color scheme. It's therefore
