@@ -98,6 +98,7 @@ some people might be interested in them:
   resolves imports for `pyright`.
 - [jupytext.nvim](https://github.com/GCBallesteros/jupytext.nvim): Convert
   Jupyter Notebooks to code and back.
+- [py-requirements.nvim](https://github.com/MeanderingProgrammer/py-requirements.nvim): : Helps manage python requirements.
 
 ## Recommended Citation
 Please cite this software project as (APA):
