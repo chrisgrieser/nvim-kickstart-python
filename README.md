@@ -4,7 +4,7 @@
 A launch point for your nvim config for python.
 
 Similar to [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim), but
-specifically for python development.
+specifically for python.
 
 <!-- toc -->
 
@@ -40,7 +40,7 @@ reference for nvim users who want to start doing python development.
 - The config can be fully bootstrapped: all plugins and tools are automatically
   installed on startup.
 - Uses the current state-of-the-art of the nvim plugin ecosystem.
--Includes some common tooling for python development:
+- Includes some common tooling for python development:
     + LSP (Completion, Typing): `pyright`
     + Linting (Diagnostics): `ruff`
     + Formatting: `black` & `isort`
