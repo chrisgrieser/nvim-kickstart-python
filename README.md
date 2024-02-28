@@ -101,7 +101,7 @@ some people might be interested in them:
 - [py-requirements.nvim](https://github.com/MeanderingProgrammer/py-requirements.nvim): : Helps manage python requirements.
 
 ## Recommended Citation
-Please cite this software project as (APA):
+You can cite this software project as:
 
 ```txt
 Grieser, C. (2023). nvim-kickstart-python [Computer software]. 
