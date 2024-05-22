@@ -59,6 +59,8 @@ point for your regular config, or you can copypaste parts of it into your
 existing config.
 
 ## Download
+`kickstart-python` requires at least nvim 0.10.
+
 Download the [kickstart-python.lua](./kickstart-python.lua) file and run neovim
 with it:
 
