@@ -1,15 +1,8 @@
 -- BOOTSTRAP the plugin manager `lazy.nvim`
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-local lazyIsInstalled = vim.loop.fs_stat(lazypath)
-if not lazyIsInstalled then
-	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable",
-		lazypath,
-	})
+if not vim.uv.fs_stat(lazypath) then
+	local lazyrepo = "https://github.com/folke/lazy.nvim"
+	vim.system({ "git", "clone", "--filter=blob:none", lazyrepo, "--branch=stable", lazypath }):wait()
 end
 vim.opt.runtimepath:prepend(lazypath)
 
@@ -136,7 +129,7 @@ local plugins = {
 				-- "inject" is a special formatter from conform.nvim, which
 				-- formats treesitter-injected code. Basically, this makes
 				-- conform.nvim format python codeblocks inside a markdown file.
-				markdown = { "inject" }, 
+				markdown = { "inject" },
 			},
 			-- enable format-on-save
 			format_on_save = {
@@ -272,13 +265,13 @@ local plugins = {
 				"rst",
 				"ninja",
 				-- needed for formatting code-blocks inside markdown via conform.nvim
-				"markdown", 
-				"markdown_inline", 
+				"markdown",
+				"markdown_inline",
 			},
 		},
 	},
 
-	-- semshi for additional syntax highlighting. 
+	-- semshi for additional syntax highlighting.
 	-- See the README for Treesitter cs Semshi comparison.
 	-- requires `pynvim` (`python3 -m pip install pynvim`)
 	{
@@ -372,7 +365,7 @@ local plugins = {
 		config = function()
 			local listener = require("dap").listeners
 			listener.after.event_initialized["dapui_config"] = function() require("dapui").open() end
-			listener.before.event_terminated["dapui_config"] = function () require("dapui").close() end
+			listener.before.event_terminated["dapui_config"] = function() require("dapui").close() end
 			listener.before.event_exited["dapui_config"] = function() require("dapui").close() end
 		end,
 	},
@@ -416,11 +409,6 @@ local plugins = {
 		"chrisgrieser/nvim-puppeteer",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
-
-	-- better indentation behavior
-	-- by default, vim has some weird indentation behavior in some edge cases,
-	-- which this plugin fixes
-	{ "Vimjas/vim-python-pep8-indent" },
 
 	-- select virtual environments
 	-- - makes pyright and debugpy aware of the selected virtual environment
