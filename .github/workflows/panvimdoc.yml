@@ -1,0 +1,26 @@
+name: Auto-generate vimdocs
+
+on:
+  push:
+    branches: [main]
+    paths: [README.md]
+
+permissions:
+  contents: write
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    name: README.md to vimdoc
+    steps:
+      - uses: actions/checkout@v4
+      - uses: kdheepak/panvimdoc@main
+        with:
+          vimdoc: scissors
+          demojify: true
+          treesitter: true
+          version: "" # by default adds nvim 0.8 as version number…
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "chore: Auto-generate vimdocs"
+          branch: ${{ github.head_ref }}
