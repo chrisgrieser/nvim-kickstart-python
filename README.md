@@ -34,7 +34,7 @@ reference for nvim users who want to start doing python development.
 ## Philosophy & Features
 - This is not a nvim-distro, this is a *minimal* nvim config specifically for
   python. It's intended as a starting point for creating your own config.
-- Requirement: nvim v0.9.
+- Requirement: nvim 0.10.
 - ~20 plugins, ~400 lines, everything in one single `init.lua`.
 - Includes detailed comments explaining what the config does.
 - The config can be fully bootstrapped: all plugins and tools are automatically
