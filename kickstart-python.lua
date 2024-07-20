@@ -53,7 +53,7 @@ local plugins = {
 		opts = {
 			ensure_installed = {
 				"pyright", -- LSP for python
-				"ruff-lsp", -- linter for python (includes flake8, pep8, etc.)
+				"ruff", -- linter for python (includes flake8, pep8, etc.)
 				"debugpy", -- debugger
 				"black", -- formatter
 				"isort", -- organize imports
