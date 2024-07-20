@@ -141,21 +141,10 @@ local plugins = {
 	-- - select an item with `<Tab>`/`<S-Tab>`
 	{
 		"hrsh7th/nvim-cmp",
-		dependencies = {
-			"hrsh7th/cmp-nvim-lsp", -- use suggestions from the LSP
-
-			-- Snippet engine. Required for nvim-cmp to work, even if you don't
-			-- intend to use custom snippets.
-			"L3MON4D3/LuaSnip", -- snippet engine
-			"saadparwaiz1/cmp_luasnip", -- adapter for the snippet engine
-		},
+		dependencies = "hrsh7th/cmp-nvim-lsp", -- use suggestions from the LSP
 		config = function()
 			local cmp = require("cmp")
 			cmp.setup({
-				-- tell cmp to use Luasnip as our snippet engine
-				snippet = {
-					expand = function(args) require("luasnip").lsp_expand(args.body) end,
-				},
 				-- Define the mappings for the completion. The `fallback()` call
 				-- ensures that when there is no suggestion window open, the mapping
 				-- falls back to the default behavior (adding indentation).
@@ -212,9 +201,8 @@ local plugins = {
 				send_motion = "+",
 			},
 			config = {
-				-- this defined how the repl is opened. Here we set the REPL window
-				-- to open in a horizontal split to a bottom, with a height of 10
-				-- cells.
+				-- This defines how the repl is opened. Here, we set the REPL window
+				-- to open in a horizontal split to the bottom, with a height of 10.
 				repl_open_cmd = "horizontal bot 10 split",
 
 				-- This defines which binary to use for the REPL. If `ipython` is
@@ -259,7 +247,6 @@ local plugins = {
 				"toml",
 				"rst",
 				"ninja",
-				-- needed for formatting code-blocks inside markdown via conform.nvim
 				"markdown",
 				"markdown_inline",
 			},
