@@ -35,7 +35,7 @@ reference for nvim users who want to start doing python development.
 - This is not a nvim-distro, this is a *minimal* nvim config specifically for
   python. It's intended as a starting point for creating your own config.
 - Requirement: nvim 0.10.
-- ~20 plugins, ~400 lines, everything in one single `init.lua`.
+- ~15 plugins, ~350 lines, everything in one single file.
 - Includes detailed comments explaining what the config does.
 - The config can be fully bootstrapped: all plugins and tools are automatically
   installed on startup.
@@ -117,25 +117,18 @@ For other citation styles, use the following metadata:
 - [BibTeX](./CITATION.bib)
 
 ## Credits
-__Thanks__  
 [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim) as an example how
 to do this.
 
-__About Me__  
 In my day job, I am a sociologist studying the social mechanisms underlying the
 digital economy. For my PhD project, I investigate the governance of the app
 economy and how software ecosystems manage the tension between innovation and
 compatibility. If you are interested in this subject, feel free to get in touch.
 
-__Blog__  
 I also occasionally blog about vim: [Nano Tips for Vim](https://nanotipsforvim.prose.sh)
 
-__Profiles__  
-- [reddit](https://www.reddit.com/user/pseudometapseudo/)
-- [Discord](https://discordapp.com/users/462774483044794368/)
 - [Academic Website](https://chris-grieser.de/)
-- [GitHub](https://github.com/chrisgrieser/)
-- [Twitter](https://twitter.com/pseudo_meta)
+- [Mastodon](https://pkm.social/@pseudometa)
 - [ResearchGate](https://www.researchgate.net/profile/Christopher-Grieser)
 - [LinkedIn](https://www.linkedin.com/in/christopher-grieser-ba693b17a/)
 
