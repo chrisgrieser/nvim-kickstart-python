@@ -90,7 +90,7 @@ local plugins = {
 			-- ruff uses an LSP proxy, therefore it needs to be enabled as if it
 			-- were a LSP. In practice, ruff only provides linter-like diagnostics
 			-- and some code actions, and is not a full LSP yet.
-			require("lspconfig").ruff_lsp.setup({
+			require("lspconfig").ruff.setup({
 				-- organize imports disabled, since we are already using `isort` for that
 				-- alternative, this can be enabled to make `organize imports`
 				-- available as code action
