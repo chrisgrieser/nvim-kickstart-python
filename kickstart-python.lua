@@ -124,6 +124,11 @@ local plugins = {
 		config = function()
 			local cmp = require("cmp")
 			cmp.setup({
+				-- register the lsp as completion provider
+				sources = cmp.config.sources({
+					{ name = "nvim_lsp" },
+				}),
+
 				-- Define the mappings for the completion. The `fallback()` call
 				-- ensures that when there is no suggestion window open, the mapping
 				-- falls back to the default behavior (adding indentation).
