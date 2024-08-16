@@ -112,10 +112,6 @@ Grieser, C. (2023). nvim-kickstart-python [Computer software].
 https://github.com/chrisgrieser/nvim-kickstart-python
 ```
 
-For other citation styles, use the following metadata:
-- [Citation File Format](./CITATION.cff)
-- [BibTeX](./CITATION.bib)
-
 ## Credits
 [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim) as an example how
 to do this.
