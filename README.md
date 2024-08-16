@@ -1,5 +1,6 @@
 <!-- LTeX: enabled=false -->
-# nvim-kickstart-python <!-- LTeX: enabled=true -->
+# nvim-kickstart-python
+<!-- LTeX: enabled=true -->
 
 A launch point for your nvim config for python.
 
@@ -32,7 +33,7 @@ reference for nvim users who want to start doing python development.
 <!-- vale Google.FirstPerson = NO -->
 
 ## Philosophy & Features
-- This is not a nvim-distro, this is a *minimal* nvim config specifically for
+- This is not a nvim distro, this is a *minimal* nvim config specifically for
   python. It's intended as a starting point for creating your own config.
 - Requirement: nvim 0.10.
 - ~15 plugins, ~350 lines, everything in one single file.
@@ -51,7 +52,7 @@ reference for nvim users who want to start doing python development.
   auto-converting f-strings.
 
 ## Recommendation
-Go though the [kickstart-python.lua](./kickstart-python.lua), it is commented in
+Go through the [kickstart-python.lua](./kickstart-python.lua), it is commented in
 detail.
 
 You can copypaste the config into you current `init.lua` to use it as a starting
@@ -61,7 +62,7 @@ existing config.
 ## Download
 `kickstart-python` requires at least nvim 0.10.
 
-Download the [kickstart-python.lua](./kickstart-python.lua) file and run neovim
+Download the [kickstart-python.lua](./kickstart-python.lua) file and run Neovim
 with it:
 
 ```bash
@@ -78,11 +79,11 @@ The config automatically installs all the plugins and tooling needed.
 
 ## Syntax Highlighting
 Is provided by the [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
-plugin and/or the [semshi](https://github.com/numirias/semshi) plugin. The later
+plugin and/or the [semshi](https://github.com/numirias/semshi) plugin. The latter
 requires `pynvim` (`python3 -m pip install pynvim`) to be installed.
 
 Both provide better highlighting, treesitter is considered the more "modern"
-approach. Treesitter covers some cases semshi does not and vice versa. Have a
+approach. Treesitter covers some cases `semshi` does not and vice versa. Have a
 [look at the comparison](./treesitter-or-semshi.md) to decide for yourself which
 one to use. The config uses treesitter as the more modern approach.
 
@@ -94,8 +95,8 @@ some people might be interested in them:
 - [NotebookNavigator](https://github.com/GCBallesteros/NotebookNavigator.nvim):
   Jupyter Notebook emulation
 - [magma.nvim](https://github.com/dccsillag/magma-nvim): Jupyter Notebook integration
-- [ropify.nvim](https://github.com/niqodea/ropify): ropify integration
-- [nvim-conda](https://github.com/kmontocam/nvim-conda): conda environment selector
+- [ropify.nvim](https://github.com/niqodea/ropify): `ropify` integration
+- [nvim-conda](https://github.com/kmontocam/nvim-conda): `conda` environment selector
 - [nvim-lspimport](https://github.com/stevanmilic/nvim-lspimport): Automatically
   resolves imports for `pyright`.
 - [jupytext.nvim](https://github.com/GCBallesteros/jupytext.nvim): Convert
