@@ -286,7 +286,7 @@ local plugins = {
 	-- - toggle debugger UI manually with `<leader>du`
 	{
 		"rcarriga/nvim-dap-ui",
-		dependencies = "mfussenegger/nvim-dap",
+		dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"},
 		keys = {
 			{
 				"<leader>du",
@@ -310,6 +310,10 @@ local plugins = {
 		"mfussenegger/nvim-dap-python",
 		dependencies = "mfussenegger/nvim-dap",
 		config = function()
+			-- fix: E5108: Error executing lua .../Local/nvim-data/lazy/nvim-dap-ui/lua/dapui/controls.lua:14: attempt to index local 'element' (a nil value)
+			-- see: https://github.com/rcarriga/nvim-dap-ui/issues/279#issuecomment-1596258077
+			local dap, dapui = require("dap"), require("dapui")
+			dapui.setup()
 			-- uses the debugypy installation by mason
 			local debugpyPythonPath = require("mason-registry").get_package("debugpy"):get_install_path()
 				.. "/venv/bin/python3"
