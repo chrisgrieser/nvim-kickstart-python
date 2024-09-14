@@ -132,7 +132,7 @@ local plugins = {
 				-- Define the mappings for the completion. The `fallback()` call
 				-- ensures that when there is no suggestion window open, the mapping
 				-- falls back to the default behavior (adding indentation).
-				mappings = cmp.mapping.preset.insert({
+				mapping = cmp.mapping.preset.insert({
 					["<CR>"] = cmp.mapping.confirm({ select = true }), -- true = autoselect first entry
 					["<Tab>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
