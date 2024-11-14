@@ -18,6 +18,9 @@ vim.opt.rtp:prepend(lazypath)
 
 --------------------------------------------------------------------------------
 
+-- define what key is used for `<leader>`. Here, we use `,`.
+vim.g.mapleader = ","
+
 local plugins = {
 	-- TOOLING: COMPLETION, DIAGNOSTICS, FORMATTING
 
