@@ -21,8 +21,9 @@ vim.opt.rtp:prepend(lazypath)
 local plugins = {
 	-- TOOLING: COMPLETION, DIAGNOSTICS, FORMATTING
 
-	-- Manager for external tools (LSPs, linters, debuggers, formatters)
-	-- auto-install of those external tools
+	-- MASON
+	-- * Manager for external tools (LSPs, linters, debuggers, formatters)
+	-- * auto-install those external tools
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		dependencies = {
@@ -32,11 +33,9 @@ local plugins = {
 		opts = {
 			ensure_installed = {
 				"pyright", -- LSP for python
-				"ruff", -- linter for python (includes flake8, pep8, etc.)
+				"ruff", -- linter & formatter (includes flake8, pep8, black, isort, etc.)
 				"debugpy", -- debugger
-				"black", -- formatter
-				"isort", -- organize imports
-				"taplo", -- LSP for toml (for pyproject.toml files)
+				"taplo", -- LSP for toml (e.g., for pyproject.toml files)
 			},
 		},
 	},
@@ -70,95 +69,40 @@ local plugins = {
 			-- were a LSP. In practice, ruff only provides linter-like diagnostics
 			-- and some code actions, and is not a full LSP yet.
 			require("lspconfig").ruff.setup({
-				-- organize imports disabled, since we are already using `isort` for that
-				-- alternative, this can be enabled to make `organize imports`
-				-- available as code action
-				settings = {
-					organizeImports = false,
-				},
 				-- disable ruff as hover provider to avoid conflicts with pyright
 				on_attach = function(client) client.server_capabilities.hoverProvider = false end,
 			})
 		end,
 	},
 
-	-- Formatting client: conform.nvim
-	-- - configured to use black & isort in python
-	-- - use the taplo-LSP for formatting in toml
-	-- - Formatting is triggered via `<leader>f`, but also automatically on save
+	-- COMPLETION
 	{
-		"stevearc/conform.nvim",
-		event = "BufWritePre", -- load the plugin before saving
-		keys = {
-			{
-				"<leader>f",
-				function() require("conform").format({ lsp_fallback = true }) end,
-				desc = "Format",
-			},
-		},
+		"saghen/blink.cmp",
+		version = "v0.*", -- blink.cmp requires a release tag for its rust binary
+
 		opts = {
-			formatters_by_ft = {
-				-- first use isort and then black
-				python = { "isort", "black" },
-				-- "inject" is a special formatter from conform.nvim, which
-				-- formats treesitter-injected code. Basically, this makes
-				-- conform.nvim format python codeblocks inside a markdown file.
-				markdown = { "inject" },
+			-- 'default' for mappings similar to built-in vim completion
+			-- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
+			-- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
+			keymap = { preset = "default" },
+
+			highlight = {
+				-- sets the fallback highlight groups to nvim-cmp's highlight groups
+				-- useful for when your theme doesn't support blink.cmp
+				use_nvim_cmp_as_default = true,
 			},
-			-- enable format-on-save
-			format_on_save = {
-				-- when no formatter is setup for a filetype, fallback to formatting
-				-- via the LSP. This is relevant e.g. for taplo (toml LSP), where the
-				-- LSP can handle the formatting for us
-				lsp_fallback = true,
-			},
+			-- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+			-- adjusts spacing to ensure icons are aligned
+			nerd_font_variant = "mono",
 		},
-	},
-
-	-- Completion via nvim-cmp
-	-- - Confirm a completion with `<CR>` (Return)
-	-- - select an item with `<Tab>`/`<S-Tab>`
-	{
-		"hrsh7th/nvim-cmp",
-		dependencies = "hrsh7th/cmp-nvim-lsp", -- use suggestions from the LSP
-		config = function()
-			local cmp = require("cmp")
-			cmp.setup({
-				-- register the lsp as completion provider
-				sources = cmp.config.sources({
-					{ name = "nvim_lsp" },
-				}),
-
-				-- Define the mappings for the completion. The `fallback()` call
-				-- ensures that when there is no suggestion window open, the mapping
-				-- falls back to the default behavior (adding indentation).
-				mapping = cmp.mapping.preset.insert({
-					["<CR>"] = cmp.mapping.confirm({ select = true }), -- true = autoselect first entry
-					["<Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_next_item()
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
-					["<S-Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_prev_item()
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
-				}),
-			})
-		end,
 	},
 
 	-----------------------------------------------------------------------------
 	-- PYTHON REPL
 	-- A basic REPL that opens up as a horizontal split
-	-- - use `<leader>i` to toggle the REPL
-	-- - use `<leader>I` to restart the REPL
-	-- - `+` serves as the "send to REPL" operator. That means we can use `++`
+	-- * use `<leader>i` to toggle the REPL
+	-- * use `<leader>I` to restart the REPL
+	-- * `+` serves as the "send to REPL" operator. That means we can use `++`
 	-- to send the current line to the REPL, and `+j` to send the current and the
 	-- following line to the REPL, like we would do with other vim operators.
 	{
@@ -211,7 +155,7 @@ local plugins = {
 	-- SYNTAX HIGHLIGHTING & COLORSCHEME
 
 	-- treesitter for syntax highlighting
-	-- - auto-installs the parser for python
+	-- * auto-installs the parser for python
 	{
 		"nvim-treesitter/nvim-treesitter",
 		-- automatically update the parsers with every new release of treesitter
@@ -247,7 +191,6 @@ local plugins = {
 	{
 		"folke/tokyonight.nvim",
 		-- ensure that the color scheme is loaded at the very beginning
-		lazy = false,
 		priority = 1000,
 		-- enable the colorscheme
 		config = function() vim.cmd.colorscheme("tokyonight") end,
@@ -257,9 +200,9 @@ local plugins = {
 	-- DEBUGGING
 
 	-- DAP Client for nvim
-	-- - start the debugger with `<leader>dc`
-	-- - add breakpoints with `<leader>db`
-	-- - terminate the debugger `<leader>dt`
+	-- * start the debugger with `<leader>dc`
+	-- * add breakpoints with `<leader>db`
+	-- * terminate the debugger `<leader>dt`
 	{
 		"mfussenegger/nvim-dap",
 		keys = {
@@ -282,8 +225,8 @@ local plugins = {
 	},
 
 	-- UI for the debugger
-	-- - the debugger UI is also automatically opened when starting/stopping the debugger
-	-- - toggle debugger UI manually with `<leader>du`
+	-- * the debugger UI is also automatically opened when starting/stopping the debugger
+	-- * toggle debugger UI manually with `<leader>du`
 	{
 		"rcarriga/nvim-dap-ui",
 		dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
@@ -304,16 +247,15 @@ local plugins = {
 	},
 
 	-- Configuration for the python debugger
-	-- - configures debugpy for us
-	-- - uses the debugpy installation from mason
+	-- * configures debugpy for us
+	-- * uses the debugpy installation from mason
 	{
 		"mfussenegger/nvim-dap-python",
 		dependencies = "mfussenegger/nvim-dap",
 		config = function()
 			-- fix: E5108: Error executing lua .../Local/nvim-data/lazy/nvim-dap-ui/lua/dapui/controls.lua:14: attempt to index local 'element' (a nil value)
 			-- see: https://github.com/rcarriga/nvim-dap-ui/issues/279#issuecomment-1596258077
-			local dap, dapui = require("dap"), require("dapui")
-			dapui.setup()
+			require("dapui").setup()
 			-- uses the debugypy installation by mason
 			local debugpyPythonPath = require("mason-registry").get_package("debugpy"):get_install_path()
 				.. "/venv/bin/python3"
@@ -326,7 +268,7 @@ local plugins = {
 	-- some plugins that help with python-specific editing operations
 
 	-- Docstring creation
-	-- - quickly create docstrings via `<leader>a`
+	-- * quickly create docstrings via `<leader>a`
 	{
 		"danymat/neogen",
 		opts = true,
@@ -340,8 +282,8 @@ local plugins = {
 	},
 
 	-- f-strings
-	-- - auto-convert strings to f-strings when typing `{}` in a string
-	-- - also auto-converts f-strings back to regular strings when removing `{}`
+	-- * auto-convert strings to f-strings when typing `{}` in a string
+	-- * also auto-converts f-strings back to regular strings when removing `{}`
 	{
 		"chrisgrieser/nvim-puppeteer",
 		dependencies = "nvim-treesitter/nvim-treesitter",
@@ -381,10 +323,11 @@ vim.api.nvim_create_autocmd("FileType", {
 		iabbrev("true", "True")
 		iabbrev("false", "False")
 
-		-- in the same way, we can fix habits regarding comments or None
+		-- we can also fix other habits we might have from other languages
 		iabbrev("--", "#")
 		iabbrev("null", "None")
 		iabbrev("none", "None")
 		iabbrev("nil", "None")
+		iabbrev("function", "def")
 	end,
 })
