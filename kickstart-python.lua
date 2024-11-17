@@ -19,6 +19,7 @@ vim.opt.rtp:prepend(lazypath)
 --------------------------------------------------------------------------------
 
 -- define what key is used for `<leader>`. Here, we use `,`.
+-- (`:help mapleader` for information what the leader key is)
 vim.g.mapleader = ","
 
 local plugins = {
@@ -45,6 +46,7 @@ local plugins = {
 
 	-- Setup the LSPs
 	-- `gd` and `gr` for goto definition / references
+	-- `<C-f>` for formatting
 	-- `<leader>c` for code actions (organize imports, etc.)
 	{
 		"neovim/nvim-lspconfig",
@@ -52,6 +54,7 @@ local plugins = {
 			{ "gd", vim.lsp.buf.definition, desc = "Goto Definition" },
 			{ "gr", vim.lsp.buf.references, desc = "Goto References" },
 			{ "<leader>c", vim.lsp.buf.code_action, desc = "Code Action" },
+			{ "<C-f>", vim.lsp.buf.format, desc = "Format File" },
 		},
 		init = function()
 			-- this snippet enables auto-completion
