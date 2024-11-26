@@ -1,6 +1,19 @@
 *nvim-kickstart-python.txt*      For Neovim      Last change: 2024 November 26
 
 ==============================================================================
+Table of Contents                    *nvim-kickstart-python-table-of-contents*
+
+1. nvim-kickstart-python         |nvim-kickstart-python-nvim-kickstart-python|
+  - Motivation        |nvim-kickstart-python-nvim-kickstart-python-motivation|
+  - Philosophy & Features|nvim-kickstart-python-nvim-kickstart-python-philosophy-&-features|
+  - Recommendation|nvim-kickstart-python-nvim-kickstart-python-recommendation|
+  - Download            |nvim-kickstart-python-nvim-kickstart-python-download|
+  - Syntax Highlighting|nvim-kickstart-python-nvim-kickstart-python-syntax-highlighting|
+  - Additional plugins of interest|nvim-kickstart-python-nvim-kickstart-python-additional-plugins-of-interest|
+  - Recommended Citation|nvim-kickstart-python-nvim-kickstart-python-recommended-citation|
+  - Credits              |nvim-kickstart-python-nvim-kickstart-python-credits|
+
+==============================================================================
 1. nvim-kickstart-python         *nvim-kickstart-python-nvim-kickstart-python*
 
 A launch point for your nvim config for python.
