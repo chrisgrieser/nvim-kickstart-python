@@ -82,10 +82,10 @@ Is provided by the [nvim-treesitter](https://github.com/nvim-treesitter/nvim-tre
 plugin and/or the [semshi](https://github.com/numirias/semshi) plugin. The latter
 requires `pynvim` (`python3 -m pip install pynvim`) to be installed.
 
-Both provide better highlighting, treesitter is considered the more "modern"
+Both provide better highlighting, Treesitter is considered the more "modern"
 approach. Treesitter covers some cases `semshi` does not and vice versa. Have a
 [look at the comparison](./treesitter-or-semshi.md) to decide for yourself which
-one to use. The config uses treesitter as the more modern approach.
+one to use. The config uses Treesitter as the more modern approach.
 
 ## Additional plugins of interest
 These plugins are not included in the config, but they are worth mentioning, as
@@ -101,7 +101,8 @@ some people might be interested in them:
   resolves imports for `pyright`.
 - [jupytext.nvim](https://github.com/GCBallesteros/jupytext.nvim): Convert
   Jupyter Notebooks to code and back.
-- [py-requirements.nvim](https://github.com/MeanderingProgrammer/py-requirements.nvim): Helps manage python requirements.
+- [py-requirements.nvim](https://github.com/MeanderingProgrammer/py-requirements.nvim):
+  Helps manage python requirements.
 - [venv-selector](https://github.com/linux-cultist/venv-selector.nvim): switch
   virtual environments
 
