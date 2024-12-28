@@ -1,4 +1,4 @@
-*nvim-kickstart-python.txt*      For Neovim      Last change: 2024 December 25
+*nvim-kickstart-python.txt*      For Neovim      Last change: 2024 December 28
 
 ==============================================================================
 Table of Contents                    *nvim-kickstart-python-table-of-contents*
@@ -56,7 +56,6 @@ PHILOSOPHY & FEATURES*nvim-kickstart-python-nvim-kickstart-python-philosophy-&-f
 - Includes some common tooling for python development:
     - LSP (Completion, Typing): `pyright`
     - Linting (Diagnostics): `ruff`
-    - Formatting: `black` & `isort`
     - Debugger: `debugpy`
     - Embedded REPL: `ipython` (if not installed, falls back to `python3`)
 - In addition, this config includes editing utilities specifically for python,
