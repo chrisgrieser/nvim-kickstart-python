@@ -102,6 +102,7 @@ some people might be interested in them:
   Helps manage python requirements.
 - [venv-selector](https://github.com/linux-cultist/venv-selector.nvim): switch
   virtual environments
+- [python-import](https://github.com/kiyoon/python-import.nvim)
 
 ## Recommended Citation
 You can cite this software project as:
