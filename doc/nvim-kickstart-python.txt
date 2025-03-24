@@ -1,4 +1,4 @@
-*nvim-kickstart-python.txt*      For Neovim      Last change: 2024 December 28
+*nvim-kickstart-python.txt*        For Neovim       Last change: 2025 March 24
 
 ==============================================================================
 Table of Contents                    *nvim-kickstart-python-table-of-contents*
@@ -123,7 +123,7 @@ code and back. - py-requirements.nvim
 <https://github.com/MeanderingProgrammer/py-requirements.nvim> Helpsmanage
 python requirements. - venv-selector
 <https://github.com/linux-cultist/venv-selector.nvim>switch virtual
-environments
+environments - python-import <https://github.com/kiyoon/python-import.nvim>
 
 
 RECOMMENDED CITATION*nvim-kickstart-python-nvim-kickstart-python-recommended-citation*
